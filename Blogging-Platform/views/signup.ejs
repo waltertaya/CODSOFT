@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head') %>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <form id="signup-form" class="form" method="post" action="/login">
+                <h2>Signup</h2>
+                <div class="input-group">
+                    <label for="signup-username">Username</label>
+                    <input type="text" id="signup-username" name="signup-username" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-fullname">Full Names</label>
+                    <input type="text" id="signup-fullname" name="signup-fullname" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="signup-email" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" name="signup-password" required>
+                </div>
+                <div class="input-group">
+                    <label for="signup-password-confirmation">Confirm Password</label>
+                    <input type="password" id="signup-password-confirmation" name="signup-password-confirmation" required>
+                </div>
+                <button type="submit">Signup</button>
+                <p>Already have an account? <a href="/login">Login</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

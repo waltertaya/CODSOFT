@@ -1,0 +1,70 @@
+<div class="posts-categorization">
+    <header>
+        <label for="search">
+            <input type="text" placeholder="Enter your keyword?">
+            <button><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="black" d="m19.6 21l-6.3-6.3q-.75.6-1.725.95T9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l6.3 6.3zM9.5 14q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14"/></svg></button>
+        </label>
+    </header>
+    <div class="main-categories">
+        <div class="popular-posts-container">
+            <h6>POPULAR POSTS</h6>
+            <div class="popular-posts">
+                <style>
+                    .popular-posts {
+                        background-image: url('<%= popularPosts.image %>');
+                        background-repeat: no-repeat;
+                        width: 250px;
+                        height: 150px;
+                        background-size: cover;
+                        background-position: center;
+                    }
+                </style>
+                <p><%= popularPosts.date %></p>
+                <h4><%= popularPosts.title %></h4>
+            </div>
+        </div>
+        <div class="recent-posts">
+            <h6>RECENT POSTS</h6>
+            <% for( let index = 0; index < recentPosts.length; index++ ) { %>
+                <div class="recent-post">
+                    <div class="recent-post-image">
+                        <img src="<%= recentPosts[index].image %>" alt="">
+                    </div>
+                    <div class="recent-post-content">
+                        <p style="font-weight: bold;"><%= recentPosts[index].title %></p>
+                        <p style="font-size: 10px;"><%= recentPosts[index].date %></p>
+                    </div>
+                </div>
+            <% } %>
+        </div>
+        <div class="categories">
+            <h6>CATEGORIES</h6>
+            <div class="categories-links">
+                <a href="/">
+                    <span style="margin-bottom: 8px;">All</span>
+                    <span>(<%= totalPosts %>)</span>
+                </a><hr>
+                <a href="/travel">
+                    <span style="margin-bottom: 8px;">Travel</span>
+                    <span>(<%= totalPosts %>)</span>
+                </a><hr>
+                <a href="/thinking">
+                    <span style="margin-bottom: 8px;">Thinking</span>
+                    <span>(<%= totalPosts %>)</span>
+                </a><hr>
+                <a href="/lifestyle">
+                    <span style="margin-bottom: 8px;">Lifestyle</span>
+                    <span>(<%= totalPosts %>)</span>
+                </a><hr>
+                <a href="/design">
+                    <span style="margin-bottom: 8px;">Design</span>
+                    <span>(<%= totalPosts %>)</span>
+                </a><hr>
+                <a href="/">
+                    <span style="margin-bottom: 8px;">Creative</span>
+                    <span>(7)</span>
+                </a><hr>
+            </div>
+        </div>
+    </div>
+</div>

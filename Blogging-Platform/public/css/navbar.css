@@ -1,0 +1,42 @@
+.side-navbar {
+    width: 250px;
+    height: 100vh;
+    background-color: #10161d;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 15px;
+    color: white;
+}
+.side-navbar h2 {
+    margin-bottom: 6px;
+}
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.nav-links span {
+    font-weight: bold;
+    font-size: 14px;
+}
+.side-navbar ul {
+    list-style-type: none;
+}
+.side-navbar ul li {
+    margin-bottom: 10px;
+    margin-top: 5px;
+    padding-left: 15px;
+}
+.home-page-ul, .blog-ul, .posts-ul, .pages-ul {
+    display: none;
+}
+footer {
+    position: fixed;
+    bottom: 15px;
+}
+.icons {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}

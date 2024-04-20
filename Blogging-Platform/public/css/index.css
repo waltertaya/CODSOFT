@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f1f1f1;
+    overflow-y: scroll;
+    display: flex;
+}
+
+/* Main container of the post */
+.main-container {
+    width: calc(100% - 250px);
+    margin-left: 250px;
+    padding: 15px;
+    display: flex;
+}
