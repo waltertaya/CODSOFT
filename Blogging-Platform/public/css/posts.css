@@ -38,7 +38,7 @@
     background-color: white;
     padding: 10px;
     width: fit-content;
-    font-size: 14px;
+    font-size: 10px;
     font-weight: bold;
 }
 .post-content {
@@ -46,13 +46,17 @@
     flex-direction: column;
     gap: 10px;
 }
-.post-content h3 {
-    font-size: 20px;
+.post-content h6 {
+    font-size: 16px;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
 }
+.post-content p {
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+}
 .post-footer {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
     display: flex;
     justify-content: space-between;
@@ -64,4 +68,5 @@
     border: none;
     border-bottom: 1px solid #d1d1d1;
     cursor: pointer;
+    font-size: 14px;
 }
