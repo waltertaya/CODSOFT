@@ -17,3 +17,16 @@ body {
     padding: 15px;
     display: flex;
 }
+
+@media screen and (max-width: 1210px) {
+    .main-container {
+        width: calc(100% - 200px);
+        margin-left: 200px;
+    }
+}
+@media screen and (max-width: 1090px) {
+    .main-container {
+        width: calc(100% - 150px);
+        margin-left: 150px;
+    }
+}

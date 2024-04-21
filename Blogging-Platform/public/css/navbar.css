@@ -40,3 +40,13 @@ footer {
     gap: 10px;
     margin-bottom: 10px;
 }
+@media screen and (max-width: 1210px) {
+    .side-navbar {
+        width: 200px;
+    }
+}
+@media screen and (max-width: 1090px) {
+    .side-navbar {
+        width: 150px;
+    }
+}

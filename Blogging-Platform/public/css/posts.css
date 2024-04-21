@@ -70,3 +70,38 @@
     cursor: pointer;
     font-size: 14px;
 }
+@media screen and (max-width: 1210px) {
+    .different-posts{
+        width: 100%;
+        gap: unset;
+        justify-content: space-around;
+    }
+    .post-container {
+        width: 250px;
+    }
+}
+@media screen and (max-width: 1090px) {
+    .different-posts {
+        width: 100%;
+        justify-content: space-around;
+        gap: unset;
+    }
+    .post-container {
+        width: 200px;
+    }
+    
+}
+@media screen and (max-width: 900px) {
+    .different-posts {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 50px;
+        margin-top: 50px;
+    }
+    .post-container {
+        width: 150px;
+    }
+}
+/* Mobile */

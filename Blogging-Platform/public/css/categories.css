@@ -120,3 +120,8 @@ header label {
     justify-content: space-between;
     margin-top: 5px;
 }
+@media screen and (max-width: 1210px) {
+    .posts-categorization {
+        display: none;
+    }
+}
