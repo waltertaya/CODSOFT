@@ -46,9 +46,13 @@ pagesNavEl.addEventListener('click', () => {
 });
 
 menuMobileBtnEl.addEventListener('click', () => {
-    if (sideNavEl.style.display === 'none') {
-        sideNavEl.style.display = 'block';
+    if (window.innerWidth < 768) {
+        if (sideNavEl.style.display === 'none') {
+            sideNavEl.style.display = 'block';
+        } else {
+            sideNavEl.style.display = 'none';
+        }
     } else {
-        sideNavEl.style.display = 'none';
+        sideNavEl.style.display = 'block';
     }
 });

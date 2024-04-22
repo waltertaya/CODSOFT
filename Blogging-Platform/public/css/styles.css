@@ -39,6 +39,11 @@ body {
     border-radius: 4px;
 }
 
+.input-group input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
 button {
     padding: 10px;
     background-color: #007bff;

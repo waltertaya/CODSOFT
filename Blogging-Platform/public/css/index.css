@@ -59,6 +59,7 @@ body {
         align-items: center;
         gap: 0;
         height: 20px;
+        user-select: none;
     }
     .menu-mobile input {
         height: 30px;
