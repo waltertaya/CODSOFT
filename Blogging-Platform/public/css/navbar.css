@@ -18,7 +18,11 @@
 }
 .nav-links span {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
+    user-select: none;
+}
+.nav-links span:hover {
+    cursor: pointer;
 }
 .side-navbar ul {
     list-style-type: none;
@@ -28,12 +32,20 @@
     margin-top: 5px;
     padding-left: 15px;
 }
+.side-navbar ul li a {
+    text-decoration: none;
+    color: white;
+}
 .home-page-ul, .blog-ul, .posts-ul, .pages-ul {
     display: none;
 }
 footer {
     position: fixed;
     bottom: 15px;
+}
+.copyright {
+    font-size: 12px;
+    color: #b3b3b3;
 }
 .icons {
     display: flex;
@@ -48,5 +60,18 @@ footer {
 @media screen and (max-width: 1090px) {
     .side-navbar {
         width: 150px;
+    }
+    .copyright {
+        font-size: 10px;
+    }
+}
+/* Mobile designs */
+@media screen and (max-width: 768px) {
+    .side-navbar {
+        display: none;
+        padding-top: 55px;
+    }
+    .main-content {
+        margin-left: 0;
     }
 }
