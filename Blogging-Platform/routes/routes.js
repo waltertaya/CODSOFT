@@ -38,6 +38,13 @@ router.post('/signup', (req, res) => {
     }
 });
 
+router.get('/', (req, res) => {
+    let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
+    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    let totalPosts = posts.length;
+    res.render('landing-page', { posts, popularPosts, recentPosts, totalPosts });
+});
+
 router.use((req, res, next) => {
     if (req.session.user) {
         next();
@@ -48,14 +55,7 @@ router.use((req, res, next) => {
 
 router.get('/logout', (req, res) => {
     req.session.destroy();
-    res.redirect('/login');
-});
-
-router.get('/', (req, res) => {
-    let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
-    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-    let totalPosts = posts.length;
-    res.render('landing-page', { posts, popularPosts, recentPosts, totalPosts });
+    res.redirect('/');
 });
 
 router.get('/posts', (req, res) => {
