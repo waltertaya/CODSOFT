@@ -9,13 +9,6 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(session({
-//     secret: process.env.SECRET_KEY,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: { secure: false }
-//     }));
-
 app.use(session({
     secret: process.env.SECRET_KEY,
     resave: false,
@@ -31,5 +24,5 @@ app.use('/', routes);
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server running on http://localhost:${port}`);
 });
