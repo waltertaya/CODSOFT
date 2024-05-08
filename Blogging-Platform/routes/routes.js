@@ -3,6 +3,7 @@ const req = require('express/lib/request');
 const db = require('../DB/db');
 const Post = require('../DB/models/posts');
 const User = require('../DB/models/users');
+const { hashPassword, comparePassword } = require('../DB/security/hashing');
 require('dotenv').config();
 
 const { posts, users } = require('../dummy');
@@ -17,7 +18,7 @@ router.post('/login', async (req, res) => {
     const foundUser = await users.find(user => user.username === username && user.password === password);
     if (foundUser) {
         req.session.user = foundUser;
-        res.redirect('/');
+        res.redirect('/posts');
     } else {
         res.redirect('/login');
     }
@@ -37,13 +38,13 @@ router.post('/signup', (req, res) => {
     }
 });
 
-// router.use((req, res, next) => {
-//     if (req.session.user) {
-//         next();
-//     } else {
-//         res.redirect('/login');
-//     }
-// });
+router.use((req, res, next) => {
+    if (req.session.user) {
+        next();
+    } else {
+        res.redirect('/');
+    }
+});
 
 router.get('/logout', (req, res) => {
     req.session.destroy();
@@ -51,6 +52,13 @@ router.get('/logout', (req, res) => {
 });
 
 router.get('/', (req, res) => {
+    let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
+    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    let totalPosts = posts.length;
+    res.render('landing-page', { posts, popularPosts, recentPosts, totalPosts });
+});
+
+router.get('/posts', (req, res) => {
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
     let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     let totalPosts = posts.length;
