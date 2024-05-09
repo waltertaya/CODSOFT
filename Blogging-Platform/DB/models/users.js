@@ -29,7 +29,7 @@ const userSchema = new Schema({
     },
     location: {
         type: String,
-        required: true
+        required: false
     },
     followers: {
         type: Number,
@@ -49,7 +49,7 @@ const userSchema = new Schema({
     },
     areasOfInterest: {
         type: [String],
-        required: true
+        required: false
     },
     socials: {
         type: [
@@ -62,7 +62,7 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        required: true
+        required: false
     },
     reactions: {
         type: Number,
@@ -74,4 +74,6 @@ const userSchema = new Schema({
     }
 });
 
-module.exports = model('User', userSchema);
+const User = model('User', userSchema);
+
+module.exports = User;

@@ -15,10 +15,15 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    const foundUser = await users.find(user => user.username === username && user.password === password);
+    const foundUser = await User.findOne({ username });
     if (foundUser) {
         req.session.user = foundUser;
-        res.redirect('/posts');
+        const isPasswordCorrect = await comparePassword(password, foundUser.password);
+        if (isPasswordCorrect) {
+            res.redirect('/posts');
+        } else {
+            res.redirect('/login');
+        }
     } else {
         res.redirect('/login');
     }
@@ -28,13 +33,49 @@ router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
-router.post('/signup', (req, res) => {
-    const { username, password } = req.body;
-    if (username && password) {
-        req.session.username = username;
-        res.redirect('/login');
+router.post('/signup', async (req, res) => {
+    const { username, password, fullname, email, conPassword } = req.body;
+    const existingUser = await User.findOne({ username });
+    const existingEmail = await User.findOne({ email });
+    if (existingUser || existingEmail) {
+        res.redirect('/signup');
+    }
+    if (password === conPassword) {
+        const hashedPassword = await hashPassword(password);
+        const newUser = new User({username, password: hashedPassword, fullname, email});
+        await newUser.save();
+        req.session.user = newUser;
+        res.redirect('/more-info');
     } else {
         res.redirect('/signup');
+    }
+});
+
+router.get('/more-info', (req, res) => {
+    res.render('more-info');
+});
+
+router.post('/more-info', async (req, res) => {
+    const { location, bio, areasOfInterest, socialLink, socialName } = req.body;
+    const socials = [];
+    for (let i = 0; i < socialName.length; i++) {
+        const social = { name: socialName[i], link: socialLink[i] };
+        socials.push(social);
+    }
+    const userId = req.session.user._id;
+    try {
+        const user = await User.findById(userId);
+        if (!user) {
+            throw new Error("User not found");
+        }
+        user.location = location;
+        user.bio = bio;
+        user.areasOfInterest = areasOfInterest.split(',');
+        user.socials = socials;
+        await user.save();
+        res.redirect('/posts');
+    } catch (error) {
+        res.status(500).send("Error updating user details");
     }
 });
 

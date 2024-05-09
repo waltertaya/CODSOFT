@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User Details</title>
+    <link rel="stylesheet" href="css/more-info.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Add User Details</h2>
+        <form action="" method="post">
+            <label for="image">Profile Image:</label>
+            <input type="text" id="image" name="image" placeholder="Enter profile image URL">
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" placeholder="Enter your location">
+
+            <label for="bio">Bio:</label>
+            <textarea id="bio" name="bio" placeholder="Enter your bio"></textarea>
+
+            <label for="areasOfInterest">Areas of Interest:</label>
+            <input type="text" id="areasOfInterest" name="areasOfInterest" placeholder="Enter your areas of interest (comma-separated)">
+
+            <label for="socials">Social Media Links:</label>
+            <div id="socials">
+                <div class="social">
+                    <input type="text" name="socialName[]" placeholder="Name">
+                    <input type="text" name="socialLink[]" placeholder="Link">
+                </div>
+            </div>
+            <button type="button" class="addSocial-btn">Add Social Media</button>
+
+            <button type="submit">Save</button>
+        </form>
+    </div>
+    <script type="module" src="js/index.js"></script>
+</body>
+</html>

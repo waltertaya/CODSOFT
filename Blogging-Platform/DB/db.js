@@ -7,7 +7,7 @@ const db_password = process.env.DB_PASSWORD;
 
 
 try {
-    mongoose.connect(`mongodb+srv://${db_username}:${db_password}@waltertayadb.y2nbk2w.mongodb.net/Chitchat?retryWrites=true&w=majority`);
+    mongoose.connect(`mongodb+srv://${db_username}:${db_password}@waltertayadb.y2nbk2w.mongodb.net/BloggingPlatform?retryWrites=true&w=majority`);
     console.log('Connected to database successfully');
 } catch (error) {
     console.log(error);
