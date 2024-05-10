@@ -26,6 +26,7 @@ body {
 
 .input-group {
     margin-bottom: 15px;
+    width: 96%;
 }
 
 .input-group label {
@@ -37,6 +38,7 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    width: 100%;
 }
 
 .input-group input:focus {
@@ -55,4 +57,20 @@ button {
 }
 button:hover {
     background-color: #0056b3;
+}
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 0 10px;
+        max-width: 100%;
+    }
+}
+@media screen and (max-width: 520px) {
+    .input-group {
+        width: 94%;
+    }
+}
+@media screen and (max-width: 405px) {
+    .input-group {
+        width: 92%;
+    }
 }
