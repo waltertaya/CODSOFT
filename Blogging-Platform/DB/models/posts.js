@@ -1,19 +1,10 @@
 const { Schema, model } = require('mongoose');
 
-// const posts = [
-//     {
-//         title: "Discover Your Inner Genius To Better",
-//         type: "Travel",
-//         author: "EWRIN JONSON",
-//         date: "MAR 22, 2021",
-//         views: 62,
-//         description: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.",
-//         image: "/assets/images/demo.jpeg",
-//         reactions: 34,
-//         comments: 12
-//     },
-
 const postSchema = new Schema({
+    username: {
+        type: String,
+        required: true
+    },
     title: {
         type: String,
         required: true

@@ -6,8 +6,20 @@ const User = require('../DB/models/users');
 const { hashPassword, comparePassword } = require('../DB/security/hashing');
 require('dotenv').config();
 
-const { posts, users } = require('../dummy');
+// const { posts, users } = require('../dummy');
 
+// Post.insertMany(posts)
+//     .then(() => console.log('Posts inserted successfully'))
+//     .catch(err => console.error('Error inserting posts:', err));
+
+const getPosts = async () => {
+    try {
+        const posts = await Post.find();
+        return posts;
+    } catch (error) {
+        console.error('Error getting posts:', error);
+    }
+};
 
 router.get('/login', (req, res) => {
     res.render('login');
@@ -79,7 +91,8 @@ router.post('/more-info', async (req, res) => {
     }
 });
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
+    const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
     let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     let totalPosts = posts.length;
@@ -99,14 +112,16 @@ router.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-router.get('/posts', (req, res) => {
+router.get('/posts', async (req, res) => {
+    const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
     let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     let totalPosts = posts.length;
     res.render('index', { posts, popularPosts, recentPosts, totalPosts });
 });
 
-router.get('/travel', (req, res) => {
+router.get('/travel', async (req, res) => {
+    const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
     let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     let travelPosts = posts.filter(post => post.type === 'Travel');
@@ -114,7 +129,8 @@ router.get('/travel', (req, res) => {
     res.render('index', { posts: travelPosts, popularPosts, recentPosts, totalPosts });
 });
 
-router.get('/thinking', (req, res) => {
+router.get('/thinking', async (req, res) => {
+    const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
     let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     let thinkingPosts = posts.filter(post => post.type === 'Thinking');
@@ -122,7 +138,8 @@ router.get('/thinking', (req, res) => {
     res.render('index', { posts: thinkingPosts, popularPosts, recentPosts, totalPosts });
 });
 
-router.get('/lifestyle', (req, res) => {
+router.get('/lifestyle', async (req, res) => {
+    const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
     let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     let lifestylePosts = posts.filter(post => post.type === 'Lifestyle');
@@ -130,7 +147,8 @@ router.get('/lifestyle', (req, res) => {
     res.render('index', { posts: lifestylePosts, popularPosts, recentPosts, totalPosts });
 });
 
-router.get('/design', (req, res) => {
+router.get('/design', async (req, res) => {
+    const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
     let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     let designPosts = posts.filter(post => post.type === 'Design');
@@ -138,9 +156,25 @@ router.get('/design', (req, res) => {
     res.render('index', { posts: designPosts, popularPosts, recentPosts, totalPosts });
 });
 
-router.get('/profile', (req, res) => {
+router.get('/create-post', (req, res) => {
+    res.render('createPost');
+});
+
+router.post('/create-post', async (req, res) => {
+    const { title, type, description, image } = req.body;
+    const author = req.session.user.fullname;
+    const username = req.session.user.username;
+    const newPost = new Post({ title, type, author, description, image, username });
+    await newPost.save();
+    res.redirect('/posts');
+});
+
+router.get('/profile',async (req, res) => {
     // let userPosts = posts.filter(post => post.author === req.session.user.username);
-    res.render('profile', { user: req.session.user, posts  });
+    const posts = await Post.find({ username: req.session.user.username });
+    const user = await User.findById(req.session.user._id);
+    console.log(user)
+    res.render('profile', { user, posts  });
 });
 
 module.exports = router;

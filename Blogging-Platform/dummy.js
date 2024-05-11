@@ -1,5 +1,6 @@
 const posts = [
     {
+        username: "ewrin",
         title: "Discover Your Inner Genius To Better",
         type: "Travel",
         author: "EWRIN JONSON",
@@ -11,6 +12,7 @@ const posts = [
         comments: 12
     },
     {
+        username: "ewrin",
         title: "Read This To Change How You Mind",
         type: "Thinking",
         author: "EWRIN JONSON",
@@ -22,6 +24,7 @@ const posts = [
         comments: 12
     },
     {
+        username: "ewrin",
         title: "Smart People Think To Get Ahead",
         type: "Thinking",
         author: "EWRIN JONSON",
@@ -33,6 +36,7 @@ const posts = [
         comments: 12
     },
     {
+        username: "ewrin",
         title: "One Simple Word To Success",
         type: "Thinking",
         author: "EWRIN JONSON",

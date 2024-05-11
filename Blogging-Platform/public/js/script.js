@@ -1,8 +1,8 @@
 const homeNavEl = document.querySelector('.home-navbar');
 const homeNavLinks = document.querySelector('.home-page-ul');
 
-const blogNavEl = document.querySelector('.blog-navbar');
-const blogNavLinks = document.querySelector('.blog-ul');
+// const blogNavEl = document.querySelector('.blog-navbar');
+// const blogNavLinks = document.querySelector('.blog-ul');
 
 const postsNavEl = document.querySelector('.posts-navbar');
 const postsNavLinks = document.querySelector('.posts-ul');
@@ -21,13 +21,13 @@ homeNavEl.addEventListener('click', () => {
     }
 });
 
-blogNavEl.addEventListener('click', () => {
-    if (blogNavLinks.style.display === 'none') {
-        blogNavLinks.style.display = 'block';
-    } else {
-        blogNavLinks.style.display = 'none';
-    }
-});
+// blogNavEl.addEventListener('click', () => {
+//     if (blogNavLinks.style.display === 'none') {
+//         blogNavLinks.style.display = 'block';
+//     } else {
+//         blogNavLinks.style.display = 'none';
+//     }
+// });
 
 postsNavEl.addEventListener('click', () => {
     if (postsNavLinks.style.display === 'none') {
