@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blogs</title>
+        <link rel="stylesheet" href="/css/navbar.css">
+        <link rel="stylesheet" href="/css/profile.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+        <link rel="manifest" href="/favicons/site.webmanifest">
+    </head>
+</head>
+<body>
+    <%- include('./partials/sidenavbar') %>
+    <main class="main-container">
+        <div class="profile-container">
+            <div class="profile-image">
+                <img src="/assets/images/user2.jpeg" alt="profile image">
+            </div>
+            <div class="profile-info">
+                <div class="following-followers">
+                    <p><%= user.followers %> Followers</p>
+                    <p><%= user.following %> Following</p>
+                </div>
+                <div class="profile-action">
+                    <h1><%= user.fulname %></h1>
+                    <button class="follow-btn">Follow</button>
+                </div>
+                <p>@<%= user.username %></p>
+                <p><%= user.role %></p>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24"><path fill="black" d="M12 11.5A2.5 2.5 0 0 1 9.5 9A2.5 2.5 0 0 1 12 6.5A2.5 2.5 0 0 1 14.5 9a2.5 2.5 0 0 1-2.5 2.5M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7"/></svg>
+                    <%= user.location %>
+                </p>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 2048 2048"><path fill="black" d="M1707 911q78 37 141 93t108 127t68 152t24 168q0 123-47 232t-128 190t-190 128t-232 47q-87 0-168-24t-151-68t-127-107t-94-142H0V171h341V0h171v171h683V0h170v171h342zM171 512h1365V341H171zm688 1024q-6-42-6-85q0-124 47-233t128-190t190-128t233-47q43 0 85 6V683H171v853zm592 341q88 0 165-33t136-92t91-135t34-166q0-88-33-166t-91-136t-136-91t-166-34q-89 0-166 33t-136 92t-91 136t-34 166q0 89 33 166t92 135t136 91t166 34m85-512h171v171h-342v-341h171z"/></svg>
+                    Joined on <%= user.joined %>
+                </p>
+                <div class="profile-socials">
+                    <% for( let index = 0; index < user.socials.length; index++ ) { %>
+                        <a href="<%= user.socials[index].link %>"><svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 256 256"><path fill="<%= user.socials[index].color %>" d="<%= user.socials[index].icon %>"/></svg></a>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+        <div class="profile-posts">
+            <div class="reactions">
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 16 16"><path fill="black" d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0M9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1m-5-.5H7a.5.5 0 0 1 0 1H4.5a.5.5 0 0 1 0-1m0 3h7a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .5-.5"/></svg>
+                    <span><%= user.posts %> posts published</span>
+                </p>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 512 512"><path fill="black" d="M256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32m0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2l-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29c7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1l-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160s-93.3 160-208 160"/></svg>
+                    <span><%= user.comments %> comments</span>
+                </p>
+                <p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 256 256"><path fill="black" d="M224 84h-43.8l7.61-41.85a12 12 0 0 0-23.62-4.3L155.8 84h-39.6l7.61-41.85a12 12 0 1 0-23.62-4.3L91.8 84H48a12 12 0 0 0 0 24h39.44l-7.27 40H32a12 12 0 0 0 0 24h43.8l-7.61 41.85a12 12 0 0 0 9.66 14A11.43 11.43 0 0 0 80 228a12 12 0 0 0 11.8-9.86l8.4-46.14h39.6l-7.61 41.85a12 12 0 0 0 9.66 14a11.43 11.43 0 0 0 2.16.2a12 12 0 0 0 11.8-9.86L164.2 172H208a12 12 0 0 0 0-24h-39.44l7.27-40H224a12 12 0 0 0 0-24m-79.83 64h-39.61l7.27-40h39.61Z"/></svg>
+                    <span><%= user.reactions %> reactions</span>
+                </p>
+            </div>
+            <div class="user-posts-container">
+                <% for( let index = 0; index < posts.length; index++ ) { %>
+                    <div class="user-post-container">
+                        <a href=""><%= posts[index].title %></a>
+                        <div class="date-reactions">
+                            <p><%= posts[index].date %></p>
+                            <p>
+                                <span><%= posts[index].reactions %></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 48 48"><path fill="brown" d="M34 9c-4.2 0-7.9 2.1-10 5.4C21.9 11.1 18.2 9 14 9C7.4 9 2 14.4 2 21c0 11.9 22 24 22 24s22-12 22-24c0-6.6-5.4-12-12-12"/></svg>
+                            </p>
+                            <p>
+                                <span></span><%= posts[index].comments %></span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 512 512"><path fill="black" d="M256 32C114.6 32 0 125.1 0 240c0 47.6 19.9 91.2 52.9 126.3C38 405.7 7 439.1 6.5 439.5c-6.6 7-8.4 17.2-4.6 26S14.4 480 24 480c61.5 0 110-25.7 139.1-46.3C192 442.8 223.2 448 256 448c141.4 0 256-93.1 256-208S397.4 32 256 32m0 368c-26.7 0-53.1-4.1-78.4-12.1l-22.7-7.2l-19.5 13.8c-14.3 10.1-33.9 21.4-57.5 29c7.3-12.1 14.4-25.7 19.9-40.2l10.6-28.1l-20.6-21.8C69.7 314.1 48 282.2 48 240c0-88.2 93.3-160 208-160s208 71.8 208 160s-93.3 160-208 160"/></svg>
+                            </p>
+                        </div>
+                        <hr>
+                    </div>
+                <% } %>                            
+        </div>
+    </main>
+    <script>
+        const homeNavEl = document.querySelector('.home-navbar');
+        const homeNavLinks = document.querySelector('.home-page-ul');
+
+        // const blogNavEl = document.querySelector('.blog-navbar');
+        // const blogNavLinks = document.querySelector('.blog-ul');
+
+        const postsNavEl = document.querySelector('.posts-navbar');
+        const postsNavLinks = document.querySelector('.posts-ul');
+
+        const pagesNavEl = document.querySelector('.pages-navbar');
+        const pagesNavLinks = document.querySelector('.pages-ul');
+
+        const menuMobileBtnEl = document.querySelector('.menu-mobile-btn');
+        const sideNavEl = document.querySelector('.side-navbar');
+
+        homeNavEl.addEventListener('click', () => {
+            if (homeNavLinks.style.display === 'none') {
+                homeNavLinks.style.display = 'block';
+            } else {
+                homeNavLinks.style.display = 'none';
+            }
+        });
+
+        // blogNavEl.addEventListener('click', () => {
+        //     if (blogNavLinks.style.display === 'none') {
+        //         blogNavLinks.style.display = 'block';
+        //     } else {
+        //         blogNavLinks.style.display = 'none';
+        //     }
+        // });
+
+        postsNavEl.addEventListener('click', () => {
+            if (postsNavLinks.style.display === 'none') {
+                postsNavLinks.style.display = 'block';
+            } else {
+                postsNavLinks.style.display = 'none';
+            }
+        });
+
+        pagesNavEl.addEventListener('click', () => {
+            if (pagesNavLinks.style.display === 'none') {
+                pagesNavLinks.style.display = 'block';
+            } else {
+                pagesNavLinks.style.display = 'none';
+            }
+        });
+
+        menuMobileBtnEl.addEventListener('click', () => {
+            if (window.innerWidth < 768) {
+                if (sideNavEl.style.display === 'none') {
+                    sideNavEl.style.display = 'block';
+                } else {
+                    sideNavEl.style.display = 'none';
+                }
+            } else {
+                sideNavEl.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

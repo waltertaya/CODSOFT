@@ -97,7 +97,8 @@ router.post('/more-info', async (req, res) => {
 router.get('/', async (req, res) => {
     const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
-    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
     let totalPosts = posts.length;
     res.render('landing-page', { posts, popularPosts, recentPosts, totalPosts });
 });
@@ -118,7 +119,8 @@ router.get('/logout', (req, res) => {
 router.get('/posts', async (req, res) => {
     const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
-    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
     let totalPosts = posts.length;
     res.render('index', { posts, popularPosts, recentPosts, totalPosts });
 });
@@ -126,7 +128,8 @@ router.get('/posts', async (req, res) => {
 router.get('/travel', async (req, res) => {
     const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
-    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
     let travelPosts = posts.filter(post => post.type === 'Travel');
     let totalPosts = travelPosts.length;
     res.render('index', { posts: travelPosts, popularPosts, recentPosts, totalPosts });
@@ -135,7 +138,7 @@ router.get('/travel', async (req, res) => {
 router.get('/thinking', async (req, res) => {
     const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
-    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
     let thinkingPosts = posts.filter(post => post.type === 'Thinking');
     let totalPosts = thinkingPosts.length;
     res.render('index', { posts: thinkingPosts, popularPosts, recentPosts, totalPosts });
@@ -144,7 +147,8 @@ router.get('/thinking', async (req, res) => {
 router.get('/lifestyle', async (req, res) => {
     const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
-    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
     let lifestylePosts = posts.filter(post => post.type === 'Lifestyle');
     let totalPosts = lifestylePosts.length;
     res.render('index', { posts: lifestylePosts, popularPosts, recentPosts, totalPosts });
@@ -153,7 +157,8 @@ router.get('/lifestyle', async (req, res) => {
 router.get('/design', async (req, res) => {
     const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
-    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    // let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+    let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
     let designPosts = posts.filter(post => post.type === 'Design');
     let totalPosts = designPosts.length;
     res.render('index', { posts: designPosts, popularPosts, recentPosts, totalPosts });
@@ -183,7 +188,7 @@ router.get('/profile',async (req, res) => {
 router.get('/profile/:username', async (req, res) => {
     const posts = await Post.find({ username: req.params.username });
     const user = await User.findOne({ username: req.params.username });
-    res.render('profile', { user, posts });
+    res.render('other-profile', { user, posts });
 });
 
 module.exports = router;
