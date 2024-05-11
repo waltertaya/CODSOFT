@@ -3,6 +3,9 @@ const req = require('express/lib/request');
 const db = require('../DB/db');
 const Post = require('../DB/models/posts');
 const User = require('../DB/models/users');
+const Followers = require('../DB/models/followers');
+const Following = require('../DB/models/following');
+const Comment = require('../DB/models/comments');
 const { hashPassword, comparePassword } = require('../DB/security/hashing');
 require('dotenv').config();
 
@@ -173,8 +176,14 @@ router.get('/profile',async (req, res) => {
     // let userPosts = posts.filter(post => post.author === req.session.user.username);
     const posts = await Post.find({ username: req.session.user.username });
     const user = await User.findById(req.session.user._id);
-    console.log(user)
     res.render('profile', { user, posts  });
+});
+
+// displays others profile
+router.get('/profile/:username', async (req, res) => {
+    const posts = await Post.find({ username: req.params.username });
+    const user = await User.findOne({ username: req.params.username });
+    res.render('profile', { user, posts });
 });
 
 module.exports = router;
