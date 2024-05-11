@@ -105,3 +105,13 @@ hr {
         margin-left: 150px;
     }
 }
+@media screen and (max-width: 990px) {
+    .main-container {
+        width: 100%;
+        margin-left: 0;
+        padding: 20px;
+    }
+    .profile-posts {
+        grid-template-columns: 1fr;
+    }
+}
