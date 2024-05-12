@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= post.title %></title>
+    <link rel="stylesheet" href="/css/read-more.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+</head>
+<body>
+    <%- include('./partials/sidenavbar') %>
+    <div class="menu-mobile">
+        <svg class="menu-mobile-btn" xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 24 24"><path fill="black" d="M3 18v-2h18v2zm0-5v-2h18v2zm0-5V6h18v2z"/></svg>
+    </div>
+    <div class="main-container">
+        <header>
+            <h1><%= post.title %></h1>
+            <p>By <%= post.author %> | <%= post.date %></p>
+        </header>
+        <div class="content">
+            <img src="<%= post.image %>" alt="<%= post.title %>">
+            <p><%= post.description %></p>
+            <div class="reactions">
+                <button id="like-btn"><svg xmlns="http://www.w3.org/2000/svg" width="1rem" height="1rem" viewBox="0 0 48 48"><path fill="brown" d="M34 9c-4.2 0-7.9 2.1-10 5.4C21.9 11.1 18.2 9 14 9C7.4 9 2 14.4 2 21c0 11.9 22 24 22 24s22-12 22-24c0-6.6-5.4-12-12-12"/></svg></button>
+                <span><%= post.reactions %> likes</span>
+            </div>
+        </div>
+        <section class="comments">
+            <h2>Comments</h2>
+            <ul>
+                <% comments.forEach(comment => { %>
+                    <li><%= comment.text %></li>
+                <% }) %>
+            </ul>
+            <form action="" method="POST">
+                <textarea name="comment" id="comment" placeholder="Write your comment here..." required></textarea>
+                <input type="hidden" name="postId" value="<%= post._id %>">
+                <button type="submit">Add Comment</button>
+            </form>
+        </section>
+    </div>
+    <script type="module" src="/js/script.js"></script>
+</body>
+</html>

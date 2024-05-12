@@ -125,6 +125,23 @@ router.get('/posts', async (req, res) => {
     res.render('index', { posts, popularPosts, recentPosts, totalPosts });
 });
 
+router.get('/posts/:id', async (req, res) => {
+    const post = await Post.findById(req.params.id);
+    post.views += 1;
+    await post.save();
+    const comments = await Comment.find({ postId: req.params.id });
+    res.render('read-more', { post, comments });
+});
+
+router.post('/posts/:id', async (req, res) => {
+    const { comment, postId } = req.body;
+    const userId = req.session.user._id;
+    const newComment = new Comment({ userId, postId, text: comment });
+    await newComment.save();
+    res.redirect(`/posts/${postId}`);
+});
+
+
 router.get('/travel', async (req, res) => {
     const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];

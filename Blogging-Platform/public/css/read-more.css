@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+header h1 {
+    margin: 0;
+}
+.main-container {
+    width: calc(100% - 350px);
+    margin-left: 250px;
+    padding: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.menu-mobile {
+    display: none;
+}
+.content img {
+    height: 200px;
+    width: 300px;
+    margin-bottom: 20px;
+}
+.reactions {
+    margin-top: 20px;
+}
+#like-btn {
+    border: none;
+}
+.comments {
+    padding: 20px;
+}
+.comments form {
+    margin-top: 20px;
+}
+.comments textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+.comments button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.comments button:hover {
+    background-color: #0056b3;
+}
+
+@media screen and (max-width: 1210px) {
+    .main-container {
+        width: calc(100% - 300px);
+        margin-left: 200px;
+    }
+}
+@media screen and (max-width: 1090px) {
+    .main-container {
+        width: calc(100% - 250px);
+        margin-left: 150px;
+    }
+}
+/* Mobile designs */
+@media screen and (max-width: 768px) {
+    .main-container {
+        width: 90%;
+        margin-left: 0;
+        padding-top: 50px;
+        margin-top: 0;
+    }
+    .menu-mobile {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f1f1f1;
+        padding: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .menu-mobile header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+        height: 20px;
+        user-select: none;
+    }
+    .menu-mobile input {
+        height: 30px;
+        padding: 5px;
+        border: none;
+        background-color: #f1f1f1;
+    }
+    .menu-mobile input:focus {
+        outline: none;
+    }
+    .menu-mobile button {
+        height: 30px;
+        padding: 5px;
+        background-color: #f1f1f1;
+        border: none;
+        cursor: pointer;
+    }
+    .menu-mobile button:focus {
+        outline: none;
+    }
+    .menu-mobile label {
+        border-bottom: 1px solid #d1d1d1;
+    }
+}
