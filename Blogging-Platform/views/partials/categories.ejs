@@ -1,4 +1,4 @@
-<div class="posts-categorization">
+<div class="posts-categorization" id="style-3">
     <header>
         <label for="search">
             <input type="text" placeholder="Enter your keyword?">
@@ -14,7 +14,7 @@
                         background-image: url('<%= popularPosts.image %>');
                         background-repeat: no-repeat;
                         width: 250px;
-                        height: 100px;
+                        height: 150px;
                         background-size: cover;
                         background-position: center;
                     }
@@ -40,7 +40,7 @@
         <div class="categories">
             <h6>CATEGORIES</h6>
             <div class="categories-links">
-                <a href="/">
+                <a href="/posts">
                     <span style="margin-bottom: 5px;">All</span>
                     <span>(<%= totalPosts %>)</span>
                 </a><hr>
@@ -60,7 +60,7 @@
                     <span style="margin-bottom: 5px;">Design</span>
                     <span>(<%= totalPosts %>)</span>
                 </a><hr>
-                <a href="/">
+                <a href="/posts">
                     <span style="margin-bottom: 5px;">Creative</span>
                     <span>(7)</span>
                 </a><hr>
