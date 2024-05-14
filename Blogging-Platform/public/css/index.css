@@ -21,7 +21,9 @@ body {
     display: none;
 }
 
-@media screen and (max-width: 1210px) {
+/* Responsive */
+
+@media screen and (max-width: 1920px) {
     .main-container {
         width: calc(100% - 200px);
         margin-left: 200px;
