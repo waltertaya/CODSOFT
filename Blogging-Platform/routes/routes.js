@@ -1,11 +1,12 @@
 const router = require('express').Router();
-const req = require('express/lib/request');
-const db = require('../DB/db');
+const db = require('../DB/db');   //database connection
+// models
 const Post = require('../DB/models/posts');
 const User = require('../DB/models/users');
 const Followers = require('../DB/models/followers');
 const Following = require('../DB/models/following');
 const Comment = require('../DB/models/comments');
+// hashing passwords using bcrpty
 const { hashPassword, comparePassword } = require('../DB/security/hashing');
 require('dotenv').config();
 
@@ -15,6 +16,8 @@ require('dotenv').config();
 //     .then(() => console.log('Posts inserted successfully'))
 //     .catch(err => console.error('Error inserting posts:', err));
 
+
+// retrieve all posts
 const getPosts = async () => {
     try {
         const posts = await Post.find();
@@ -24,6 +27,7 @@ const getPosts = async () => {
     }
 };
 
+// my routes
 router.get('/login', (req, res) => {
     res.render('login');
 });

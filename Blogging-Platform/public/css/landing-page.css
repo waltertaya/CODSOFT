@@ -33,7 +33,7 @@
 .btns a:hover {
     background-color: #2c3b4f;
 }
-@media screen and (max-width: 1920px) {
+@media screen and (max-width: 1210px) {
     .side-navbar-login {
         width: 200px;
     }
