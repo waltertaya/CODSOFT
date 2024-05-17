@@ -101,7 +101,7 @@
         justify-content: space-around;
     }
     .post-container {
-        width: 400px;
+        width: 300px;
     }
 }
 @media screen and (max-width: 1210px) {
