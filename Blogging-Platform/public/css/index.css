@@ -16,11 +16,18 @@ body {
     margin-left: 250px;
     padding: 15px;
     display: flex;
+    gap: 20px;
 }
 .menu-mobile {
     display: none;
 }
 
+/* @media screen and (min-width: 1284px) {
+    .main-container {
+        width: calc(100% - 300px);
+        margin-left: 300px;
+    }
+} */
 /* Responsive */
 
 @media screen and (max-width: 1210px) {

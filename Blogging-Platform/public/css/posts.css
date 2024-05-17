@@ -1,4 +1,5 @@
 .different-posts {
+    width: calc(100% - 250px);
     display: flex;
     flex-direction: column;
 }
@@ -94,6 +95,14 @@
     border-bottom: 1px solid #d1d1d1;
     cursor: pointer;
     font-size: 14px;
+}
+@media screen and (min-width: 1284px) {
+    .different-posts{
+        justify-content: space-around;
+    }
+    .post-container {
+        width: 400px;
+    }
 }
 @media screen and (max-width: 1210px) {
     .different-posts{
