@@ -103,6 +103,9 @@
     .post-container {
         width: 320px;
     }
+    .posts {
+        gap: 40px;
+    }
 }
 @media screen and (max-width: 1210px) {
     .different-posts{
