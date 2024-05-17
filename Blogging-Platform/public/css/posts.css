@@ -99,6 +99,7 @@
 @media screen and (min-width: 1284px) {
     .different-posts{
         justify-content: space-around;
+        padding-left: 40px;
     }
     .post-container {
         width: 320px;
