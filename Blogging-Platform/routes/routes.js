@@ -1,23 +1,18 @@
 const router = require('express').Router();
-const db = require('../DB/db');   //database connection
-// models
+const multer = require('multer');
+const db = require('../DB/db');   // database connection
 const Post = require('../DB/models/posts');
 const User = require('../DB/models/users');
 const Followers = require('../DB/models/followers');
 const Following = require('../DB/models/following');
 const Comment = require('../DB/models/comments');
-// hashing passwords using bcrpty
 const { hashPassword, comparePassword } = require('../DB/security/hashing');
 require('dotenv').config();
 
-// const { posts, users } = require('../dummy');
+// Configure Multer to store files in memory
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
-// Post.insertMany(posts)
-//     .then(() => console.log('Posts inserted successfully'))
-//     .catch(err => console.error('Error inserting posts:', err));
-
-
-// retrieve all posts
 const getPosts = async () => {
     try {
         const posts = await Post.find();
@@ -27,7 +22,7 @@ const getPosts = async () => {
     }
 };
 
-// my routes
+// Login route
 router.get('/login', (req, res) => {
     res.render('login');
 });
@@ -48,6 +43,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// Signup route
 router.get('/signup', (req, res) => {
     res.render('signup');
 });
@@ -70,6 +66,7 @@ router.post('/signup', async (req, res) => {
     }
 });
 
+// More-info route
 router.get('/more-info', (req, res) => {
     res.render('more-info');
 });
@@ -98,15 +95,16 @@ router.post('/more-info', async (req, res) => {
     }
 });
 
+// Landing page route
 router.get('/', async (req, res) => {
     const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
-    // let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
     let totalPosts = posts.length;
     res.render('landing-page', { posts, popularPosts, recentPosts, totalPosts });
 });
 
+// Middleware for authenticated routes
 router.use((req, res, next) => {
     if (req.session.user) {
         next();
@@ -115,15 +113,16 @@ router.use((req, res, next) => {
     }
 });
 
+// Logout route
 router.get('/logout', (req, res) => {
     req.session.destroy();
     res.redirect('/');
 });
 
+// Posts routes
 router.get('/posts', async (req, res) => {
     const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
-    // let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
     let totalPosts = posts.length;
     res.render('index', { posts, popularPosts, recentPosts, totalPosts });
@@ -145,11 +144,10 @@ router.post('/posts/:id', async (req, res) => {
     res.redirect(`/posts/${postId}`);
 });
 
-
+// Category routes
 router.get('/travel', async (req, res) => {
     const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
-    // let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
     let travelPosts = posts.filter(post => post.type === 'Travel');
     let totalPosts = travelPosts.length;
@@ -168,7 +166,6 @@ router.get('/thinking', async (req, res) => {
 router.get('/lifestyle', async (req, res) => {
     const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
-    // let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
     let lifestylePosts = posts.filter(post => post.type === 'Lifestyle');
     let totalPosts = lifestylePosts.length;
@@ -178,34 +175,43 @@ router.get('/lifestyle', async (req, res) => {
 router.get('/design', async (req, res) => {
     const posts = await getPosts();
     let popularPosts = posts.sort((a, b) => b.views - a.views)[0];
-    // let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     let recentPosts = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 3);
     let designPosts = posts.filter(post => post.type === 'Design');
     let totalPosts = designPosts.length;
     res.render('index', { posts: designPosts, popularPosts, recentPosts, totalPosts });
 });
 
+// Create post routes
 router.get('/create-post', (req, res) => {
     res.render('createPost');
 });
 
-router.post('/create-post', async (req, res) => {
-    const { title, type, description, image } = req.body;
+router.post('/create-post', upload.single('image'), async (req, res) => {
+    console.log(req.file); // Log the file object
+    console.log(req.body); // Log the form body
+
+    const { title, type, description } = req.body;
+
+    if (!req.file) {
+        return res.status(400).send('No file uploaded.');
+    }
+
+    const imageBuffer = req.file.buffer;
+    const imageBase64 = imageBuffer.toString('base64');
     const author = req.session.user.fullname;
     const username = req.session.user.username;
-    const newPost = new Post({ title, type, author, description, image, username });
+    const newPost = new Post({ title, type, author, description, image: imageBase64, username });
     await newPost.save();
     res.redirect('/posts');
 });
 
-router.get('/profile',async (req, res) => {
-    // let userPosts = posts.filter(post => post.author === req.session.user.username);
+// Profile routes
+router.get('/profile', async (req, res) => {
     const posts = await Post.find({ username: req.session.user.username });
     const user = await User.findById(req.session.user._id);
-    res.render('profile', { user, posts  });
+    res.render('profile', { user, posts });
 });
 
-// displays others profile
 router.get('/profile/:username', async (req, res) => {
     const posts = await Post.find({ username: req.params.username });
     const user = await User.findOne({ username: req.params.username });
