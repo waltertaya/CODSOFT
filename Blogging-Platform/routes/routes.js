@@ -187,22 +187,29 @@ router.get('/create-post', (req, res) => {
 });
 
 router.post('/create-post', upload.single('image'), async (req, res) => {
-    console.log(req.file); // Log the file object
-    console.log(req.body); // Log the form body
+    try {
+        // Debugging logs
+        console.log('File:', req.file);
+        console.log('Body:', req.body);
 
-    const { title, type, description } = req.body;
+        const { title, type, description } = req.body;
 
-    if (!req.file) {
-        return res.status(400).send('No file uploaded.');
+        if (!req.file) {
+            return res.status(400).send('No file uploaded.');
+        }
+
+        const imageBuffer = req.file.buffer;
+        const imageBase64 = imageBuffer.toString('base64');
+        const author = req.session.user.fullname;
+        const username = req.session.user.username;
+
+        const newPost = new Post({ title, type, author, description, imageBase64, username });
+        await newPost.save();
+        res.redirect('/posts');
+    } catch (error) {
+        console.error('Error in /create-post:', error);
+        res.status(500).send('Internal Server Error');
     }
-
-    const imageBuffer = req.file.buffer;
-    const imageBase64 = imageBuffer.toString('base64');
-    const author = req.session.user.fullname;
-    const username = req.session.user.username;
-    const newPost = new Post({ title, type, author, description, image: imageBase64, username });
-    await newPost.save();
-    res.redirect('/posts');
 });
 
 // Profile routes
